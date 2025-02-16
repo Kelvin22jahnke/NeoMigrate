@@ -3,9 +3,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Model.Data;
 using Model.Helpers;
 using Model;
+using Migrations.Helpers.Services;
 
-Mensagens.ConfigurarConsole();
-Mensagens.MontarMensagemInicioMigration();
+ConsoleService consoleService = new ConsoleService();
+
+consoleService.MontarMensagemInicioMigration();
 
 var serviceProvider = new ServiceCollection()
           .AddDbContext<AppDbContext>(optionts => optionts.UseMySql(ConfiguracaoBD.ObterStringConexao(), new MySqlServerVersion(new Version(8, 0, 33))))
@@ -16,4 +18,4 @@ using var context = serviceProvider.GetRequiredService<AppDbContext>();
 MigrationBase migrationBase = new MigrationBase(context);
 await migrationBase.AplicarMigrations();
 
-Mensagens.MontarMensagemFimMigration();
+consoleService.MontarMensagemFimMigration();

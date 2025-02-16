@@ -4,6 +4,7 @@ using Model.Model;
 using Model.Helpers;
 using Model.Interface;
 using System.Reflection;
+using Migrations.Helpers.Services;
 
 namespace Model
 {
@@ -20,7 +21,7 @@ namespace Model
         {
 
             HashSet<string>? ultimaVersaoAtualizada = new HashSet<string> { "000000" };
-            Mensagens.InicarContadorMigrationsAtualizadas();
+            ConsoleService consoleService = new ConsoleService();
 
             //Garante que o banco exista
             _context.Database.Migrate();
@@ -40,7 +41,7 @@ namespace Model
                     try
                     {
 
-                        Mensagens.MensagemAplicandoMigration(migration.Versao);
+                        consoleService.MensagemAplicandoMigration(migration.Versao);
 
                         await migration.AtualizarAsync(_context);
 
@@ -53,8 +54,7 @@ namespace Model
                         await _context.MigrationHistoricoAtualizacoes.AddAsync(migrationHistoricoAtualizacao);
                         await _context.SaveChangesAsync();
 
-                        Mensagens.MensagemMigrationAplicada(migration.Versao);
-                        Mensagens.ContarMigrationsAtualizadas();
+                        consoleService.MensagemMigrationAplicada(migration.Versao);
                     }
                     catch (DbUpdateException dbEx)
                     {
@@ -69,7 +69,7 @@ namespace Model
                 }
             }
 
-            Mensagens.TotalizadorMigrations();
+            consoleService.TotalizadorMigrations();
         }
 
         #region "Métodos Privados"
