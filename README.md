@@ -18,7 +18,7 @@ O projeto **Migrations** é responsável por definir a estrutura do banco de dad
 ### 2. **Migrator (Console Application)** 💻
 O projeto **Migrator** é responsável por executar o processo de migração, rodando as atualizações no banco de dados de acordo com as migrations definidas no projeto **Migrations**.
 
-## 🚀 **Como Usar**
+## 🚀 **Como Usar:**
 
 ### Pré-requisitos
 
