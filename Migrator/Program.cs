@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Model.Data;
-using Model.Helpers;
 using Model;
 using Migrations.Helpers.Services;
+using Migrations.Helpers.Configuracao;
 
 ConsoleService consoleService = new ConsoleService();
 

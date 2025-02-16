@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Model.Helpers;
+using Migrations.Helpers.Configuracao;
 using Model.Model;
 
 
