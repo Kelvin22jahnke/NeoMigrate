@@ -2,7 +2,7 @@
 
 **NeoMigrate** é uma aplicação desenvolvida em **.NET Core 8** que facilita a criação de toda a estrutura de um banco de dados baseado em **migrations** feitas com **C#**. A solução é composta por dois projetos: uma **class library** para gerenciar as migrations e um **projeto console** que executa o processo de migração.
 
-## 📁 **Estrutura da Solução**
+## 📁 **Estrutura da Solução:**
 
 A solução contém dois projetos principais:
 
