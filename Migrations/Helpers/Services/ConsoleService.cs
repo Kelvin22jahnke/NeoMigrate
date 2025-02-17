@@ -18,33 +18,43 @@ namespace Migrations.Helpers.Services
 
         public void MontarMensagemInicioMigration()
         {
-            MontaMensagemInicioMigrationConsole();
-            MontaMensagemInicioMigrationLog();
+            MontarMensagem(Mensagens.LINHA_PONTILHADA);
+            MontarMensagem(Mensagens.TITULO_APLICACAO);
+            MontarMensagem(Mensagens.LINHA_PONTILHADA);
+            MontarMensagem(Mensagens.NOME_BANCO_DADOS);
+            MontarMensagem(Mensagens.LINHA_PONTILHADA);
+            MontarMensagem(Mensagens.INICIO_ATUALIZACAO);
+            Console.WriteLine();
         }
 
         public void MensagemAplicandoMigration(string Versao)
         {
-            MensagemAplicandoMigrationConsole(Versao);
-            MensagemAplicandoMigrationLog(Versao);
+            MontarMensagem($"{Mensagens.APLICANDO_MIGRATION}{Versao}");
         }
 
         public void MensagemMigrationAplicada(string Versao)
         {
-            MensagemMigrationAplicadaConsole(Versao);
-            MensagemMigrationAplicadaLog(Versao);
+            MontarMensagem($"{Mensagens.MIGRATION_APLICADA}{Versao}");
             ContarMigrationsAtualizadas();
         }
 
         public void MontarMensagemFimMigration()
         {
-            MontarMensagemFimMigrationConsole();
-            MontarMensagemFimMigrationLog();
+            MontarMensagem(Mensagens.LINHA_PONTILHADA);
+            MontarMensagem(Mensagens.ATUALIZACAO_CONCLUIDA);
+            MontarMensagem(Mensagens.LINHA_PONTILHADA);
+            MontarMensagem(Mensagens.FINALIZAR);
+            Console.ReadLine();
+            Environment.Exit(0);
         }
 
         public void TotalizadorMigrations()
         {
-            TotalizadorMigrationsConsole();
-            TotalizadorMigrationsLog();
+            MontarMensagem(Mensagens.LINHA_PONTILHADA);
+            MontarMensagem(Mensagens.FIM_ATUALIZACAO);
+            Console.WriteLine();
+            MontarMensagem(Mensagens.LINHA_PONTILHADA);
+            MontarMensagem($"{Mensagens.QUANTIDADE_REGISTROS}{_quantidadeMigrations}");
         }
 
         #endregion
@@ -57,82 +67,15 @@ namespace Migrations.Helpers.Services
             _quantidadeMigrations = 0;
         }
 
-        private void MontaMensagemInicioMigrationLog()
-        {
-            _logService.IncluirLog(Mensagens.LINHA_PONTILHADA);
-            _logService.IncluirLog(Mensagens.TITULO_APLICACAO);
-            _logService.IncluirLog(Mensagens.LINHA_PONTILHADA);
-            _logService.IncluirLog(Mensagens.NOME_BANCO_DADOS);
-            _logService.IncluirLog(Mensagens.LINHA_PONTILHADA);
-            _logService.IncluirLog(Mensagens.INICIO_ATUALIZACAO);
-        }
-
-        private static void MontaMensagemInicioMigrationConsole()
-        {
-            Console.WriteLine(Mensagens.LINHA_PONTILHADA);
-            Console.WriteLine(Mensagens.TITULO_APLICACAO);
-            Console.WriteLine(Mensagens.NOME_BANCO_DADOS);
-            Console.WriteLine(Mensagens.LINHA_PONTILHADA);
-            Console.WriteLine(Mensagens.INICIO_ATUALIZACAO);
-            Console.WriteLine();
-        }
-
-        private void MontarMensagemFimMigrationLog()
-        {
-            _logService.IncluirLog(Mensagens.LINHA_PONTILHADA);
-            _logService.IncluirLog(Mensagens.ATUALIZACAO_CONCLUIDA);
-            _logService.IncluirLog(Mensagens.LINHA_PONTILHADA);
-        }
-
-        private static void MontarMensagemFimMigrationConsole()
-        {
-            Console.WriteLine(Mensagens.LINHA_PONTILHADA);
-            Console.WriteLine(Mensagens.ATUALIZACAO_CONCLUIDA);
-            Console.WriteLine(Mensagens.LINHA_PONTILHADA);
-            Console.WriteLine(Mensagens.FINALIZAR);
-            Console.ReadLine();
-            Environment.Exit(0);
-        }
-
-        private void TotalizadorMigrationsConsole()
-        {
-            Console.WriteLine(Mensagens.LINHA_PONTILHADA);
-            Console.WriteLine(Mensagens.FIM_ATUALIZACAO);
-            Console.WriteLine();
-            Console.WriteLine(Mensagens.LINHA_PONTILHADA);
-            Console.WriteLine($"{Mensagens.QUANTIDADE_REGISTROS}{_quantidadeMigrations}");
-        }
-
-        private void TotalizadorMigrationsLog()
-        {
-            _logService.IncluirLog(Mensagens.FIM_ATUALIZACAO);
-            _logService.IncluirLog(Mensagens.LINHA_PONTILHADA);
-            _logService.IncluirLog($"{Mensagens.QUANTIDADE_REGISTROS}{_quantidadeMigrations}");
-        }
-
         private void ContarMigrationsAtualizadas()
         {
-            _quantidadeMigrations += 1;
+            _quantidadeMigrations ++;
         }
 
-        private static void MensagemMigrationAplicadaConsole(string Versao)
+        private void MontarMensagem(string mensagem)
         {
-            Console.WriteLine($"{Mensagens.MIGRATION_APLICADA}{Versao}");
-        }
-
-        private void MensagemMigrationAplicadaLog(string Versao)
-        {
-            _logService.IncluirLog($"{Mensagens.MIGRATION_APLICADA}{Versao}");
-        }
-
-        public static void MensagemAplicandoMigrationConsole(string Versao)
-        {
-            Console.WriteLine($"{Mensagens.APLICANDO_MIGRATION}{Versao}");
-        }
-
-        public void MensagemAplicandoMigrationLog(string Versao)
-        {
-            _logService.IncluirLog($"{Mensagens.APLICANDO_MIGRATION}{Versao}");
+            _logService.IncluirLog(mensagem);
+            Console.WriteLine(mensagem);
         }
 
         #endregion
