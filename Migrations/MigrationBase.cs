@@ -6,7 +6,6 @@ using System.Reflection;
 using Migrations.Helpers.Services;
 using Model.Helpers;
 using System.Text;
-using System.Collections.Generic;
 
 namespace Model
 {
