@@ -13,7 +13,9 @@ namespace Model.Helpers
         public const string MIGRATION_APLICADA = $"✅ Migration aplicada com sucesso versão: ";
         public const string ATUALIZACAO_CONCLUIDA = "✅ Todas as migrations foram aplicadas!";
         public const string QUANTIDADE_REGISTROS = $"🔄 Quantidade de Atualizações executadas no Banco de Dados: ";
+        public const string NENHUMA_MIGRACAO_PENDENTE = "✅ Nenhuma migração pendente.";
         public const string FINALIZAR = "\n🔘 Pressione ENTER para sair e fechar...";
+        public const string ATUALIZACOES_FINALIZADAS = "📌 Atualizações finalizadas.";
 
     }
 }

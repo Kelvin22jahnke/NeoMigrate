@@ -1,5 +1,4 @@
 ﻿using Model.Helpers;
-using System.Text;
 
 namespace Migrations.Helpers.Services
 {
@@ -7,6 +6,7 @@ namespace Migrations.Helpers.Services
     {
         private int _quantidadeMigrations;
         private readonly LogService _logService;
+        private readonly List<string> _listaMensagensConsole = new List<string>(); // Lista para mensagens de console
 
         public ConsoleService() 
         {
@@ -16,45 +16,61 @@ namespace Migrations.Helpers.Services
 
         #region "Métodos Públicos"
 
-        public void MontarMensagemInicioMigration()
+        public List<string> MontarMensagemInicioMigration()
         {
+            _listaMensagensConsole.Clear();
+
             MontarMensagem(Mensagens.LINHA_PONTILHADA);
             MontarMensagem(Mensagens.TITULO_APLICACAO);
             MontarMensagem(Mensagens.LINHA_PONTILHADA);
             MontarMensagem(Mensagens.NOME_BANCO_DADOS);
             MontarMensagem(Mensagens.LINHA_PONTILHADA);
             MontarMensagem(Mensagens.INICIO_ATUALIZACAO);
-            Console.WriteLine();
+
+            return _listaMensagensConsole;
         }
 
-        public void MensagemAplicandoMigration(string Versao)
+        public List<string> MensagemAplicandoMigration(string Versao)
         {
+            _listaMensagensConsole.Clear();
+
             MontarMensagem($"{Mensagens.APLICANDO_MIGRATION}{Versao}");
+
+            return _listaMensagensConsole;
         }
 
-        public void MensagemMigrationAplicada(string Versao)
+        public List<string> MensagemMigrationAplicada(string Versao)
         {
+            _listaMensagensConsole.Clear();
+
             MontarMensagem($"{Mensagens.MIGRATION_APLICADA}{Versao}");
             ContarMigrationsAtualizadas();
+
+            return _listaMensagensConsole;
         }
 
-        public void MontarMensagemFimMigration()
+        public List<string> MontarMensagemFimMigration()
         {
+            _listaMensagensConsole.Clear();
+
             MontarMensagem(Mensagens.LINHA_PONTILHADA);
             MontarMensagem(Mensagens.ATUALIZACAO_CONCLUIDA);
             MontarMensagem(Mensagens.LINHA_PONTILHADA);
-            MontarMensagem(Mensagens.FINALIZAR);
-            Console.ReadLine();
-            Environment.Exit(0);
+            MontarMensagem(Mensagens.ATUALIZACOES_FINALIZADAS);
+
+            return _listaMensagensConsole;
         }
 
-        public void TotalizadorMigrations()
+        public List<string> TotalizadorMigrations()
         {
+            _listaMensagensConsole.Clear();
+
             MontarMensagem(Mensagens.LINHA_PONTILHADA);
             MontarMensagem(Mensagens.FIM_ATUALIZACAO);
-            Console.WriteLine();
             MontarMensagem(Mensagens.LINHA_PONTILHADA);
             MontarMensagem($"{Mensagens.QUANTIDADE_REGISTROS}{_quantidadeMigrations}");
+
+            return _listaMensagensConsole;
         }
 
         #endregion
@@ -63,7 +79,6 @@ namespace Migrations.Helpers.Services
 
         private void IniciarConfiguracoesIniciais()
         {
-            Console.OutputEncoding = Encoding.UTF8;
             _quantidadeMigrations = 0;
         }
 
@@ -75,7 +90,7 @@ namespace Migrations.Helpers.Services
         private void MontarMensagem(string mensagem)
         {
             _logService.IncluirLog(mensagem);
-            Console.WriteLine(mensagem);
+            _listaMensagensConsole.Add(mensagem);
         }
 
         #endregion

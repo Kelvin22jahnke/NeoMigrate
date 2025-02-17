@@ -7,15 +7,11 @@ using Migrations.Helpers.Configuracao;
 
 ConsoleService consoleService = new ConsoleService();
 
-consoleService.MontarMensagemInicioMigration();
-
 var serviceProvider = new ServiceCollection()
           .AddDbContext<AppDbContext>(optionts => optionts.UseMySql(ConfiguracaoBD.ObterStringConexao(), new MySqlServerVersion(new Version(8, 0, 33))))
           .BuildServiceProvider();
 
 using var context = serviceProvider.GetRequiredService<AppDbContext>();
 
-MigrationBase migrationBase = new MigrationBase(context);
+MigrationBase migrationBase = new MigrationBase(context, consoleService);
 await migrationBase.AplicarMigrations();
-
-consoleService.MontarMensagemFimMigration();
