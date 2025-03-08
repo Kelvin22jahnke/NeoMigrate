@@ -6,6 +6,8 @@ using System.Reflection;
 using Migrations.Helpers.Services;
 using Model.Helpers;
 using System.Text;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Model
 {
